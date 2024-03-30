@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  oblakotekaserver:
+    image: oblakotekaserver
+    build:
+      context: .
+      dockerfile: OblakotekaServer/Dockerfile
+    ports:
+      - 5064:5064
