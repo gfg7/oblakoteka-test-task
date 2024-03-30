@@ -1,3 +1,4 @@
+using OblakotekaServer.Domain.Exceptions;
 using OblakotekaServer.Domain.Models;
 
 namespace OblakotekaServer.Domain
@@ -22,12 +23,14 @@ namespace OblakotekaServer.Domain
 
         public async Task<ProductDomain> DeleteById(Guid id)
         {
-            return await _productRepository.DeleteById(id);
+            var result = await _productRepository.DeleteById(id) ?? throw new ProductNotFoundException(id);
+            return result;
         }
 
         public async Task<ProductDomain> Edit(Guid id, ProductEditParams @params)
         {
-            return await _productRepository.Edit(id, @params);
+            var result = await _productRepository.Edit(id, @params) ?? throw new ProductNotFoundException(id);
+            return result;
         }
     }
 }
