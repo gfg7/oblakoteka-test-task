@@ -12,6 +12,10 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<TestDbContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped(typeof(CancellationToken), x =>
+x.GetRequiredService<IHttpContextAccessor>().HttpContext?.RequestAborted ?? CancellationToken.None
+);
 builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();

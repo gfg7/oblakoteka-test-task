@@ -7,6 +7,6 @@ namespace OblakotekaServer.Domain
         Task<ProductDomain> Create(ProductCreateParams @params);
         Task<ProductDomain?> DeleteById(Guid id);
         Task<ProductDomain?> Edit(Guid id, ProductEditParams @params);
-        Task<ProductDomain[]> FilterByName(string search);
+        Task<ProductDomain[]> FilterByName(string search, CancellationToken token);
     }
 }

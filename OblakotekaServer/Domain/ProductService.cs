@@ -6,14 +6,16 @@ namespace OblakotekaServer.Domain
     public class ProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly CancellationToken _token;
+        public ProductService(IProductRepository productRepository, CancellationToken token)
         {
             _productRepository = productRepository;
+            _token = token;
         }
 
         public async Task<ProductDomain[]> FilterByName(string search)
         {
-            return await _productRepository.FilterByName(search);
+            return await _productRepository.FilterByName(search, _token);
         }
 
         public async Task<ProductDomain> Create(ProductCreateParams @params)
