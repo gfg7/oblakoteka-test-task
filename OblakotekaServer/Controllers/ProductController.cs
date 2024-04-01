@@ -7,18 +7,18 @@ namespace OblakotekaServer.Controllers
 {
     [ApiController]
     [Route("api/product")]
-    public class ProductVersionController
+    public class ProductController
     {
         private readonly ProductService _service;
-        public ProductVersionController(ProductService service)
+        public ProductController(ProductService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        public async Task<ProductDTO[]> GetProductList([FromQuery] string search)
+        public async Task<ProductDTO[]> GetProductList([FromQuery] string? search=null)
         {
-            var result = await _service.FilterByName(search);
+            var result = await _service.GetProductList(search);
             return result.Select(x => x.ToDTO()).ToArray();
         }
 

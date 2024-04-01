@@ -54,8 +54,13 @@ namespace OblakotekaServer.DataAccess
         public async Task<ProductDomain[]> FilterByName(string search, CancellationToken token)
         {
             search = search.ToLower().Trim();
-            var result = _context.Products.AsNoTracking().Where(x=> x.Name.ToLower().Contains(search));
+            var result = _context.Products.AsNoTracking().Where(x => x.Name.ToLower().Contains(search));
             return await result.Select(x => x.ToDomain()).ToArrayAsync(token);
+        }
+
+        public async Task<ProductDomain[]> GetProducts(CancellationToken token)
+        {
+            return await _context.Products.AsNoTracking().Select(x => x.ToDomain()).ToArrayAsync(token);
         }
 
         private async Task<Product?> FindById(Guid id)

@@ -13,8 +13,13 @@ namespace OblakotekaServer.Domain
             _token = token;
         }
 
-        public async Task<ProductDomain[]> FilterByName(string search)
+        public async Task<ProductDomain[]> GetProductList(string? search)
         {
+            if (string.IsNullOrWhiteSpace(search))
+            {
+                return await _productRepository.GetProducts(_token);
+            }
+
             return await _productRepository.FilterByName(search, _token);
         }
 
