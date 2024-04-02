@@ -1,7 +1,15 @@
+using OblakotekaClient.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<ProductServiceClient>(); 
+builder.Services.AddHttpClient<ProductServiceClient>((serviceProvider, client) =>
+{
+    client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("SERVER_URL")!);
+});
 
 var app = builder.Build();
 
