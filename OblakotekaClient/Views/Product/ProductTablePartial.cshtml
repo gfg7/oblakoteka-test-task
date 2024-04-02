@@ -1,0 +1,20 @@
+@model IEnumerable<ProductDTO>
+
+<table class="table table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th style="text-align: -webkit-center" scope="col"><div>Название изделия</div></th>
+      <th scope="col"><div>Описание</div></th>
+    </tr>
+  </thead>
+  <tbody>
+@foreach(var s in Model)
+    {
+    <tr>
+      <td><div class="text-wrap mx-auto">@s.Name</div></td>
+      <td><div class="text-wrap text-truncate" data-toggle="tooltip" data-placement="bottom" title="@s.Description">@s.Description</div> </td>
+    </tr>
+
+    }
+  </tbody>
+</table>
