@@ -1,5 +1,4 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+using OblakotekaServer.DataAccess.Exceptions;
 using OblakotekaServer.Domain.Exceptions;
 
 namespace OblakotekaServer.Middlewares

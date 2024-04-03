@@ -7,12 +7,4 @@ namespace OblakotekaServer.Domain.Models
         string Name,
         string? Description
     );
-
-    public static class ProductDomainExtension
-    {
-        public static ProductDTO ToDTO(this ProductDomain model)
-        {
-            return new(model.Id, model.Name, model.Description);
-        }
-    }
 }
