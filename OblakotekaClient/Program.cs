@@ -1,11 +1,20 @@
 using OblakotekaClient.Services;
+using OblakotekaClient.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<ProductServiceClient>(); 
+builder.Services.Configure<ServiceConfiguration>(
+    builder.Configuration
+        .SetBasePath(builder.Environment.ContentRootPath)
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables()
+        .Build()
+);
+
+builder.Services.AddScoped<ProductServiceClient>();
 builder.Services.AddHttpClient<ProductServiceClient>((serviceProvider, client) =>
 {
     client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("SERVER_URL")!);

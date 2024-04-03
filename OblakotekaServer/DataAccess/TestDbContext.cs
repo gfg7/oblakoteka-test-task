@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using OblakotekaServer.DataAccess.Models;
+using OblakotekaServer.Utils;
 
 namespace OblakotekaServer.DataAccess;
 
 public partial class TestDbContext : DbContext
 {
-    public TestDbContext()
-    {
-    }
-
-    public TestDbContext(DbContextOptions<TestDbContext> options)
+    private readonly IOptionsMonitor<ServiceConfiguration> _configuration;
+    
+    public TestDbContext(DbContextOptions<TestDbContext> options, IOptionsMonitor<ServiceConfiguration> configuration)
         : base(options)
     {
+        _configuration = configuration;
     }
 
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
+        => optionsBuilder.UseSqlServer(_configuration.CurrentValue.DbConnectionString);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

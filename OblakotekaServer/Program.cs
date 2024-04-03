@@ -1,5 +1,6 @@
 using OblakotekaServer.DataAccess;
 using OblakotekaServer.Domain;
+using OblakotekaServer.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<ServiceConfiguration>(
+    builder.Configuration
+        .SetBasePath(builder.Environment.ContentRootPath)
+        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        .AddEnvironmentVariables()
+        .Build()
+);
 
 builder.Services.AddDbContext<TestDbContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
