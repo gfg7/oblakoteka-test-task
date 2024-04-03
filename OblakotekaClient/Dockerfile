@@ -12,18 +12,18 @@ USER appuser
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["OblakotekaServer/OblakotekaServer.csproj", "OblakotekaServer/"]
+COPY ["OblakotekaClient/OblakotekaClient.csproj", "OblakotekaClient/"]
 COPY ["OblakotekaDTO/OblakotekaDTO.csproj", "OblakotekaDTO/"]
-RUN dotnet restore "OblakotekaServer/OblakotekaServer.csproj"
+RUN dotnet restore "OblakotekaClient/OblakotekaClient.csproj"
 COPY . .
-WORKDIR "/src/OblakotekaServer"
-RUN dotnet build "OblakotekaServer.csproj" -c $configuration -o /app/build
+WORKDIR "/src/OblakotekaClient"
+RUN dotnet build "OblakotekaClient.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "OblakotekaServer.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "OblakotekaClient.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "OblakotekaServer.dll"]
+ENTRYPOINT ["dotnet", "OblakotekaClient.dll"]

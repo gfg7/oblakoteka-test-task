@@ -1,4 +1,5 @@
 version: '3.4'
+name: oblakoteka
 
 services:
   oblakotekaserver:
@@ -8,3 +9,20 @@ services:
       dockerfile: OblakotekaServer/Dockerfile
     ports:
       - 5064:5064
+    env_file: .env
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    ports:
+      - 1433:1433
+    env_file: .env
+    environment:
+      - ACCEPT_EULA=Y
+  oblakotekaclient:
+    image: oblakotekaclient
+    build:
+      context: .
+      dockerfile: OblakotekaClient/Dockerfile
+    ports:
+      - 5065:5064
+    environment:
+      - SERVER_URL=http://oblakotekaserver:5064
