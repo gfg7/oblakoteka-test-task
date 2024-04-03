@@ -13,7 +13,7 @@ namespace OblakotekaClient.Services
 
         public async Task<ProductDTO?> UpdateProduct(Guid id, ProductEditDto edittedProduct)
         {
-            var response = await _client.PutAsJsonAsync($"/product/{id}", edittedProduct);
+            var response = await _client.PutAsJsonAsync($"/api/product/{id}", edittedProduct);
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<ProductDTO>();
@@ -29,7 +29,7 @@ namespace OblakotekaClient.Services
 
         public async Task<ProductDTO?> CreateProduct(ProductCreateDTO newProduct)
         {
-            var response = await _client.PostAsJsonAsync("/product", newProduct);
+            var response = await _client.PostAsJsonAsync("/api/product", newProduct);
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<ProductDTO>();
@@ -37,7 +37,7 @@ namespace OblakotekaClient.Services
 
         public async Task<ProductDTO?> DeleteProduct(Guid id)
         {
-            var response = await _client.DeleteAsync($"/product/{id}");
+            var response = await _client.DeleteAsync($"/api/product/{id}");
             response.EnsureSuccessStatusCode();
 
             return await response.Content.ReadFromJsonAsync<ProductDTO>();

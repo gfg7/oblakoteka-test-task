@@ -4,6 +4,8 @@ using OblakotekaDTO;
 
 namespace OblakotekaClient.Controllers;
 
+[Controller]
+[Route("product")]
 public class ProductController : Controller
 {
     private readonly ProductServiceClient _productService;
@@ -17,6 +19,7 @@ public class ProductController : Controller
         return View();
     }
 
+    [HttpGet("find")]
     public async Task<IActionResult> Find([FromQuery] string search)
     {
         var result = await _productService.GetProducts(search);
