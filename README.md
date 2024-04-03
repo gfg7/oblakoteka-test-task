@@ -73,7 +73,7 @@
 Установить переменную среды SERVER_URL для OblakotekaClient - базовый url к OblakotekaServer
 
 ### Запуск через docker-compose
-Прописать в корень директории .env с параметрами DB_CONNECTION_STRING для OblakotekaServer в виде `db,1433;Database=TestDb;User Id=sa;Password=<PASSWORD>;TrustServerCertificate=true`
+Прописать в корень директории .env с параметрами DB_CONNECTION_STRING для OblakotekaServer в виде `Server=db,1433;Database=TestDb;User Id=sa;Password=<PASSWORD>;TrustServerCertificate=true`
 
 Для использования образа MSSQL достаточно задать пароль адинистратора (**sa**) - `MSSQL_SA_PASSWORD=<PASSWORD>`
 
