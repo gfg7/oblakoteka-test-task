@@ -1,6 +1,8 @@
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using OblakotekaServer.DataAccess.Models;
 using OblakotekaServer.Domain;
+using OblakotekaServer.Domain.Exceptions;
 using OblakotekaServer.Domain.Models;
 
 namespace OblakotekaServer.DataAccess
@@ -18,7 +20,7 @@ namespace OblakotekaServer.DataAccess
             var obj = @params.BuildDbModel();
 
             obj = _context.Products.Add(obj).Entity;
-            await _context.SaveChangesAsync();
+            await Save();
 
             return obj.ToDomain();
         }
@@ -32,7 +34,7 @@ namespace OblakotekaServer.DataAccess
             }
 
             _context.Products.Remove(obj);
-            await _context.SaveChangesAsync();
+            await Save();
             return obj.ToDomain();
         }
 
@@ -46,7 +48,7 @@ namespace OblakotekaServer.DataAccess
 
             obj = obj.ApplyChanges(@params);
             _context.Products.Update(obj);
-            await _context.SaveChangesAsync();
+            await Save();
 
             return obj.ToDomain();
         }
@@ -67,6 +69,28 @@ namespace OblakotekaServer.DataAccess
         private async Task<Product?> FindById(Guid id)
         {
             return await _context.Products.FindAsync(id);
+        }
+
+        private async Task Save()
+        {
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                if (ex.InnerException is SqlException e && (e.Number == 2601 || e.Number == 2627))
+                {
+                    var errorValue = ex.Entries.First()
+                        .Properties.First(x =>
+                            x.IsModified &&
+                            !x.IsTemporary || 
+                            x.EntityEntry.State == EntityState.Added &&
+                            x.Metadata.IsUniqueIndex());
+
+                    throw new NotUniqueValueException(errorValue!.CurrentValue!.ToString()!);
+                }
+            }
         }
     }
 }
