@@ -68,14 +68,14 @@
 
 ## Запуск
 ### Локальный запуск
-Установить переменную среды DB_CONNECTION_STRING для OblakotekaServer - строка подключения к MSSQL для EF в формате `Server=<SERVER>,1433;Database=TestDb;User Id=<USER>;Password=<PASSWORD>;TrustServerCertificate=true`
+Установить переменную среды / параметр в appsettings.json **DB_CONNECTION_STRING** для OblakotekaServer - строка подключения к MSSQL для EF в формате `Server=<SERVER>,1433;Database=TestDb;User Id=<USER>;Password=<PASSWORD>;TrustServerCertificate=true`
 
-Установить переменную среды SERVER_URL для OblakotekaClient - базовый url к OblakotekaServer
+Установить переменную среды / параметр в appsettings.json **SERVER_URL** для OblakotekaClient - базовый url к OblakotekaServer
 
 ### Запуск через docker-compose
-Прописать в корень директории .env с параметрами DB_CONNECTION_STRING для OblakotekaServer в виде `Server=db,1433;Database=TestDb;User Id=sa;Password=<PASSWORD>;TrustServerCertificate=true`
+Прописать в корень директории .env с параметрами **DB_CONNECTION_STRING** для OblakotekaServer в виде `Server=db,1433;Database=TestDb;User Id=sa;Password=<PASSWORD>;TrustServerCertificate=true`
 
-Для использования образа MSSQL достаточно задать пароль адинистратора (**sa**) - `MSSQL_SA_PASSWORD=<PASSWORD>`
+Для использования образа MSSQL достаточно задать пароль администратора (**sa**) - `MSSQL_SA_PASSWORD=<PASSWORD>`
 
 ```
 docker-compose -f docker-compose.yml up -d --build
