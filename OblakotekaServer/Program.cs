@@ -1,5 +1,6 @@
 using OblakotekaServer.DataAccess;
 using OblakotekaServer.Domain;
+using OblakotekaServer.Domain.Mappers;
 using OblakotekaServer.Middlewares;
 using OblakotekaServer.Utils;
 
@@ -19,6 +20,9 @@ builder.Services.Configure<ServiceConfiguration>(
         .AddEnvironmentVariables()
         .Build()
 );
+builder.Services.AddAutoMapper(typeof(ProductMapProfile));
+builder.Services.AddAutoMapper(typeof(ProductEditProfile));
+builder.Services.AddAutoMapper(typeof(ProductCreateProfile));
 
 builder.Services.AddDbContext<TestDbContext>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
