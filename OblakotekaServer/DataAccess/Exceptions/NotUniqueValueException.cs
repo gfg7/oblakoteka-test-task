@@ -1,4 +1,4 @@
-namespace OblakotekaServer.Domain.Exceptions
+namespace OblakotekaServer.DataAccess.Exceptions
 {
     public class NotUniqueValueException :Exception
     {

@@ -1,8 +1,8 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using OblakotekaServer.DataAccess.Exceptions;
 using OblakotekaServer.DataAccess.Models;
 using OblakotekaServer.Domain;
-using OblakotekaServer.Domain.Exceptions;
 using OblakotekaServer.Domain.Models;
 
 namespace OblakotekaServer.DataAccess
