@@ -1,5 +1,6 @@
 using OblakotekaServer.DataAccess;
 using OblakotekaServer.Domain;
+using OblakotekaServer.Middlewares;
 using OblakotekaServer.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<DomainExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
