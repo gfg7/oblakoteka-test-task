@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/OblakotekaClient.styles.css" asp-append-version="true" />
+    <link href="bootstrap/js/bootstrap-modal.js" rel="stylesheet" media="screen"/>
+    <link href="bootstrap/js/bootstrap-transition.js" rel="stylesheet" media="screen"/>
 </head>
 <body>
     <header>
@@ -23,6 +25,9 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Перечень изделий</a>
                         </li>
                     </ul>
+                    <button type="button" class="btn nav-link text-dark" data-bs-toggle="modal" data-bs-target="#createModal">
+                Создать новое изделие
+                    </button>
                 </div>
             </div>
         </nav>

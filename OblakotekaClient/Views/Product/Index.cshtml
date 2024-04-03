@@ -5,7 +5,6 @@
 <div class="container">
 
   <div class="row height d-flex justify-content-center align-items-center">
-
     <div class="col-md-6">
       <div class="form">
         <i class="fa fa-search"></i>
@@ -16,6 +15,70 @@
     </div>
   </div>
 </div>
-<div class="position-fixed spinner-border d-flex justify-content-center" role="status" />
-<div class="product-table">
+<div class="position-fixed spinner-border" style="left:50%" role="status" ></div>
+<div class="product-table"></div>
+
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Создание изделия</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Название</span>
+            </div>
+            <input type="text" name="Name" class="form-control">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Описание</span>
+            </div>
+            <input type="text" name="Description" class="form-control">
+          </div>
+          <div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+            <button type="button" class="btn btn-primary" onclick="CreateProduct()">Сохранить</button>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Редактирование изделия</h5>
+      </div>
+      <div class="modal-body">
+         <form>
+            <input type="hidden" name="id"/>
+                     <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Название</span>
+            </div>
+            <input type="text" name="Name" class="form-control">
+          </div>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Описание</span>
+            </div>
+            <input type="text" name="Description" class="form-control">
+          </div>
+          <div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+            <button type="button" class="btn btn-primary" onclick="EditProduct()">Сохранить</button>
+          </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
